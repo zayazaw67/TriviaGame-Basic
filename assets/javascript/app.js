@@ -6,45 +6,58 @@ var correct = 0;
 var incorrect = 0;
 var unanswered = 0;
 var timerOn = false
-var number = 3;
+var number = 120;
 var intervalId;
-var questions = [
-    {
-        question: "What year did World War I begin?",
-        answers: {
-            a: "1916",
-            b: "1914",
-            c: "1919",
-            d: "1923",
-        },
-        correctAnwer: "b"
-    },
-    {
-        question: "Where was John F. Kennedy assassinated?",
-        answers: {
-            a: "Texas",
-            b: "New York",
-            c: "Louisiana",
-            d: "Maine",
-        },
-        correctAnwer: "a"
-    },
-    {
-        question: "When did Hawaii become apart of the United States?",
-        answers: {
-            a: "1979",
-            b: "1984",
-            c: "1989",
-            d: "1904",
-        },
-        correctAnwer: "c"
-    },
+var userAnswer;
+
+// var questionCounter = 0;
+var questions = ["hello", "test", "bye", "hi"
+    // {
+    //     question: "What year did World War I begin?",
+    //     answers: [
+    //         "1916",
+    //         "1914",
+    //         "1919",
+    //         "1923",
+    //     ],
+    //     correctAnwer: "1914"
+    // },
+    // {
+    //     question: "Where was John F. Kennedy assassinated?",
+    //     answers: [
+    //         "Texas",
+    //         "New York",
+    //         "Louisiana",
+    //         "Maine",
+    //     ],
+    //     correctAnwer: "Texas"
+    // },
+    // {
+    //     question: "When did Hawaii become apart of the United States?",
+    //     answers: [
+    //         "1979",
+    //         "1984",
+    //         "1989",
+    //         "1904",
+    //     ],
+    //     correctAnwer: "1989"
+    // },
 ]
-function startGame() 
-{
+
+
+
+function startGame() {
     $("#start").hide()
     $(".questions").show()
     intervalId = setInterval(decrement, 1000);
+    // if (userAnswer === correctAnswer) {
+    //     correct++
+    // } else if ((number === 0) && (userAnswer === undefined)) {
+    //      unanswered ++ per question unanswered
+    // }
+    // else {
+    //     incorrect++
+    // } 
 }
 function decrement() {
     number--;
@@ -59,3 +72,11 @@ function decrement() {
 function stop() {
     clearInterval(intervalId);
 }
+
+function displayQuestions() {
+    for (var i = 0; i < questions.length; i++) {
+        $(".questions").appendTo("<br><hr>" + questions)
+    }
+}
+
+$(".questions").text(questions) 
