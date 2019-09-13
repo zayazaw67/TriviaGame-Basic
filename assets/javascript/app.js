@@ -50,35 +50,41 @@ $(document).ready(function () {
         },
     ];
 
-
     console.log(correctChoice)
     for (var i = 0; i < questions.length; i++) {
-        correctChoice = questions[i].correct;
-
+        // how to code line 57 to display all questions? shows undefined inside loop, shows 1 answer outside
+        correctChoice = questions[i].correct; 
         var newQuestions = $('<div>').addClass('triviaForm');
         newQuestions.append('<p>' + questions[i].question + '</p>');
         for (var j = 0; j < questions[i].answers.length; j++) {
             var answers = $('<p>').addClass("btn btn-info");
             answers.text(questions[i].answers[j]);
+            
             newQuestions.append(answers);
         };
         $('.question').append(newQuestions);
         console.log(newQuestions)
     };
+    
+    // click function
+    // this button == correctChoice
+    // ???
 
-    function checker() {
-        for (var i = 0; i < questions.length; i++) {
-            correctChoice = questions[i].correct;
-            if (userChoice === correctChoice) {
-                correct++
-            } else if ((number === 0) && (userChoice === undefined)) {
-                unanswered++
-            }
-            else {
-                incorrect++
-            }
-        }
-    };
+    // function checker() {
+    //     for (var i = 0; i < questions.length; i++) {
+    //         correctChoice = questions[i].correct;
+    //         if (userChoice === correctChoice) {
+    //             correct++
+    //         } else if ((number === 0) && (userChoice === undefined)) {
+    //             unanswered++
+    //         }
+    //         else {
+    //             incorrect++
+    //         }
+    //     }
+    // };
+
+
 
     function startGame() {
         $("#start").hide()
