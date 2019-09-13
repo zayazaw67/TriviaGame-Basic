@@ -1,1 +1,1 @@
-# TriviaGame-Basic
+Basic 4 question trivia game with timer that displays results at the end.

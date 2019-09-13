@@ -7,17 +7,12 @@ $(document).ready(function () {
     var correct = 0;
     var incorrect = 0;
     var unanswered = 0;
-    // var timerOn = false
-    var number = 5;
+    var number = 30;
     var intervalId;
-    var correctChoice;
-    var userChoice;
-    // var questionIndex;
-    var userAnswers = ["", "", ""];
+    var userAnswers = ["","","",""];
 
 
 
-    // var questionCounter = 0;
     var questions = [
         {
             question: "What year did World War I begin?",
@@ -49,6 +44,16 @@ $(document).ready(function () {
             ],
             correct: "1989"
         },
+        {
+            question: "Who was president of the United States during the Civil War?",
+            answers: [
+                "James Buchanan",
+                "Andrew Johnson",
+                "Ulysses S. Grant",
+                "Abraham Lincoln",
+            ],
+            correct: "Abraham Lincoln"
+        },
     ];
 
     function renderQuestions() {
@@ -70,9 +75,11 @@ $(document).ready(function () {
 
     //when i click on a answer
     $(document).on('click', '.btn-info', function() {
-        console.log(this);
+        // console.log(this);z
         var questionClicked = $(this).attr('data-question');
         var answerClicked = $(this).attr('value')
+        // $(answerClicked).addClass("btn-primary");
+        // add style to button  to show active choice
         console.log(questionClicked);
         console.log(answerClicked);
         userAnswers[parseInt(questionClicked)] = answerClicked;
@@ -103,8 +110,8 @@ $(document).ready(function () {
 
         // displayQuestions()
         // for (var i = 0; i < questions.length; i++) {
-
     }
+
     function decrement() {
         number--;
         $("#time").html(number);
