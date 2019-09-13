@@ -52,18 +52,15 @@ $(document).ready(function () {
     ];
 
     function renderQuestions() {
-        console.log(correctChoice)
         for (var i = 0; i < questions.length; i++) {
-            // how to code line 56 to display all questions? shows undefined inside loop, shows 1 answer outside
-            correctChoice = questions[i].correct; 
+            // correctChoice += questions[i].correct;             
             var newQuestions = $('<div>').addClass('triviaForm');
             newQuestions.append('<p>' + questions[i].question + '</p>');
             for (var j = 0; j < questions[i].answers.length; j++) {
                 var answers = $('<p>').addClass("btn btn-info");
                 answers.text(questions[i].answers[j]);
                 answers.attr('data-question', i )
-                answers.attr('value', questions[i].answers[j])
-                
+                answers.attr('value', questions[i].answers[j])                
                 newQuestions.append(answers);
             };
             $('.question').append(newQuestions);
@@ -76,43 +73,35 @@ $(document).ready(function () {
         console.log(this);
         var questionClicked = $(this).attr('data-question');
         var answerClicked = $(this).attr('value')
-
         console.log(questionClicked);
         console.log(answerClicked);
         userAnswers[parseInt(questionClicked)] = answerClicked;
-
         console.log(userAnswers); // userAnsers = ['1916', ]
     })
 
-    
     // click function
     // this.button == correctChoice
     // ???
 
-    // function checker() {
-    //     for (var i = 0; i < questions.length; i++) {
-    //      if (userAnswers[i] == questions[i].correct) {
-    //             correct++
-    //         } else if (userAnswers[i] === "") {
-    //             unanswered++
-    //         }
-    //         else {
-    //             incorrect++
-    //         }
-    //     }
-
-
-    // };
-
-
+    function checker() {
+        for (var i = 0; i < questions.length; i++) {
+         if (userAnswers[i] == questions[i].correct) {
+                correct++ 
+            } else if (userAnswers[i] === "") {
+                unanswered++
+            }
+            else {
+                incorrect++
+            }
+        }
+    }
 
     function startGame() {
         $("#start").hide()
         renderQuestions();
+        intervalId = setInterval(decrement, 1000);
 
         // displayQuestions()
-
-        intervalId = setInterval(decrement, 1000);
         // for (var i = 0; i < questions.length; i++) {
 
     }
@@ -123,8 +112,10 @@ $(document).ready(function () {
             $(".results").show();
             stop();
             $(".triviaForm").hide();
-            // checker();
+            checker();
             console.log(correct, incorrect, unanswered)
+            results = ["Number correct: " + correct + "<p></p>" + "Number incorrect: " + incorrect + "<p></p>" + "Number unanswered: " + unanswered]
+            $(".results").html(results);        
         }
     }
 
