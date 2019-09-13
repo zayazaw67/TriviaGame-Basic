@@ -13,6 +13,7 @@ $(document).ready(function () {
     var correctChoice;
     var userChoice;
     // var questionIndex;
+    var userAnswers = ["", "", ""];
 
 
 
@@ -50,47 +51,64 @@ $(document).ready(function () {
         },
     ];
 
-    console.log(correctChoice)
-    for (var i = 0; i < questions.length; i++) {
-        // how to code line 57 to display all questions? shows undefined inside loop, shows 1 answer outside
-        correctChoice = questions[i].correct; 
-        var newQuestions = $('<div>').addClass('triviaForm');
-        newQuestions.append('<p>' + questions[i].question + '</p>');
-        for (var j = 0; j < questions[i].answers.length; j++) {
-            var answers = $('<p>').addClass("btn btn-info");
-            answers.text(questions[i].answers[j]);
-            
-            newQuestions.append(answers);
+    function renderQuestions() {
+        console.log(correctChoice)
+        for (var i = 0; i < questions.length; i++) {
+            // how to code line 56 to display all questions? shows undefined inside loop, shows 1 answer outside
+            correctChoice = questions[i].correct; 
+            var newQuestions = $('<div>').addClass('triviaForm');
+            newQuestions.append('<p>' + questions[i].question + '</p>');
+            for (var j = 0; j < questions[i].answers.length; j++) {
+                var answers = $('<p>').addClass("btn btn-info");
+                answers.text(questions[i].answers[j]);
+                answers.attr('data-question', i )
+                answers.attr('value', questions[i].answers[j])
+                
+                newQuestions.append(answers);
+            };
+            $('.question').append(newQuestions);
+            console.log(newQuestions)
         };
-        $('.question').append(newQuestions);
-        console.log(newQuestions)
     };
+
+    //when i click on a answer
+    $(document).on('click', '.btn-info', function() {
+        console.log(this);
+        var questionClicked = $(this).attr('data-question');
+        var answerClicked = $(this).attr('value')
+
+        console.log(questionClicked);
+        console.log(answerClicked);
+        userAnswers[parseInt(questionClicked)] = answerClicked;
+
+        console.log(userAnswers); // userAnsers = ['1916', ]
+    })
+
     
     // click function
-    // this button == correctChoice
+    // this.button == correctChoice
     // ???
 
     // function checker() {
     //     for (var i = 0; i < questions.length; i++) {
-    //         correctChoice = questions[i].correct;
-    //         if (userChoice === correctChoice) {
+    //      if (userAnswers[i] == questions[i].correct) {
     //             correct++
-    //         } else if ((number === 0) && (userChoice === undefined)) {
+    //         } else if (userAnswers[i] === "") {
     //             unanswered++
     //         }
     //         else {
     //             incorrect++
     //         }
     //     }
+
+
     // };
 
 
 
     function startGame() {
         $("#start").hide()
-        $(".questions").show()
-        $(".triviaForm").show()
-        newQuestions.show()
+        renderQuestions();
 
         // displayQuestions()
 
@@ -105,7 +123,7 @@ $(document).ready(function () {
             $(".results").show();
             stop();
             $(".triviaForm").hide();
-            checker();
+            // checker();
             console.log(correct, incorrect, unanswered)
         }
     }
